@@ -23,6 +23,7 @@ module.exports = () => {
         // These are some common options, and not all are required.
         // Consult the docs for more info.
         swSrc: "./src-sw.js",
+        swDest: "service-worker.js",
       }),
       new HtmlWebpackPlugin({
         title: "J.A.T.E",
@@ -30,15 +31,19 @@ module.exports = () => {
       }),
       new WebpackPwaManifest({
         name: "Just Another Text Editor",
+        inject: true,
+        fingerprints: false,
         short_name: "J.A.T.E",
         description: "Just Another Text Editor PWA",
         background_color: "#ffffff",
         crossorigin: "use-credentials", //can be null, use-credentials or anonymous
+        start_url: "/",
+        publicPath: "/",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
             sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-            destination: "./assets/icons",
+            destination: path.join("assets", "icons"),
           },
         ],
       }),
